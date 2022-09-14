@@ -44,9 +44,10 @@ function onInputData(event) {
               console.log(mark)
             
           }
-        ul.innerHTML = mark;  
+        ul.innerHTML = mark.join('');  
 
       } else if ((savedCountry.length = 1)) {
+          ul.innerHTML = ''
         const markup = TEMPLATE(savedCountry[0]);
         console.log(markup);
         div.innerHTML = markup;
