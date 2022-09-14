@@ -23,8 +23,11 @@ const BASE_URL = 'https://restcountries.com/v3.1/name';
 function onInputData(event) {
   event.preventDefault();
   const country = event.target.value;
-  console.log(country);
-
+  console.log(country.length);
+if (country==='') {
+  console.log('uyer');  
+    div.innerHTML = '';
+}
   fetch(`${BASE_URL}/${country}`)
     .then(response => {
       return response.json();
@@ -46,7 +49,7 @@ function onInputData(event) {
           }
         ul.innerHTML = mark.join('');  
 
-      } else if ((savedCountry.length = 1)) {
+      } else if ((savedCountry.length === 1)) {
           ul.innerHTML = ''
         const markup = TEMPLATE(savedCountry[0]);
         console.log(markup);
