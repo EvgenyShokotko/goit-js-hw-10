@@ -50,7 +50,7 @@ if (country==='') {
         ul.innerHTML = mark.join('');  
 
       } else if ((savedCountry.length === 1)) {
-          ul.innerHTML = ''
+          ul.innerHTML = '';
         const markup = TEMPLATE(savedCountry[0]);
         console.log(markup);
         div.innerHTML = markup;
