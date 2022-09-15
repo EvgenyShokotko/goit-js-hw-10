@@ -4,7 +4,7 @@ const OPTIONS = '?fields=name,capital,population,flags,languages';
 export function fetchCountries(country) {
   return fetch(`${BASE_URL}/${country}${OPTIONS}`).then(response => {
     if (!response.ok) {
-      throw new Error(response.status);
+      throw new Error(response);
     }
     return response.json();
   });

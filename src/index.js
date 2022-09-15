@@ -10,6 +10,7 @@ import {
   input,
   htmlDivCountryDescription,
 } from './const';
+// import { renderCardFlagAndCountry, rendeCardCountry } from 'module'; не работает
 
 input.addEventListener('input', debounce(onInputData, DEBOUNCE_DELAY));
 
@@ -18,22 +19,24 @@ function onInputData(event) {
   const country = event.target.value.trim();
 
   if (country === '') {
+    Notiflix.Notify.info('The field cannot be empty.');
     clearFieldsOfHtml();
+  } else {
+    fetchCountries(country)
+      .then(savedCountry => {
+        if (savedCountry.length > 10) {
+          Notiflix.Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
+          clearFieldsOfHtml();
+        } else if (savedCountry.length < 10 && savedCountry.length >= 2) {
+          renderCardFlagAndCountry(savedCountry);
+        } else if (savedCountry.length === 1) {
+          rendeCardCountry(savedCountry);
+        }
+      })
+      .catch(onFetchError);
   }
-  fetchCountries(country)
-    .then(savedCountry => {
-      if (savedCountry.length > 10) {
-        Notiflix.Notify.info(
-          'Too many matches found. Please enter a more specific name.'
-        );
-        clearFieldsOfHtml();
-      } else if (savedCountry.length < 10 && savedCountry.length >= 2) {
-        renderCardFlagAndCountry(savedCountry);
-      } else if (savedCountry.length === 1) {
-        rendeCardCountry(savedCountry);
-      }
-    })
-    .catch(onFetchError);
 }
 
 function onFetchError(reject) {
