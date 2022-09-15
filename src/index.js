@@ -10,7 +10,6 @@ import {
   input,
   htmlDivCountryDescription,
 } from './const';
-// import { renderCardFlagAndCountry, rendeCardCountry } from 'module'; не работает
 
 input.addEventListener('input', debounce(onInputData, DEBOUNCE_DELAY));
 
@@ -24,6 +23,7 @@ function onInputData(event) {
   } else {
     fetchCountries(country)
       .then(savedCountry => {
+        console.log(savedCountry);
         if (savedCountry.length > 10) {
           Notiflix.Notify.info(
             'Too many matches found. Please enter a more specific name.'
@@ -46,18 +46,15 @@ function onFetchError(reject) {
 
 function rendeCardCountry(savedCountry) {
   htmlUlFlagAndCounty.innerHTML = '';
-  const markup = TEMPLATE(savedCountry[0]);
-
-  htmlDivCountryDescription.innerHTML = markup;
+  htmlDivCountryDescription.innerHTML = TEMPLATE(savedCountry[0]);
 }
 
 function renderCardFlagAndCountry(savedCountry) {
-  let mark = [];
+  let countryList = [];
   for (let index = savedCountry.length - 1; index >= 0; index = index - 1) {
-    const markup = COUNTRY_LIST(savedCountry[index]);
-    mark.push(markup);
+    countryList.push(COUNTRY_LIST(savedCountry[index]));
   }
-  htmlUlFlagAndCounty.innerHTML = mark.join('');
+  htmlUlFlagAndCounty.innerHTML = countryList.join('');
   htmlDivCountryDescription.innerHTML = '';
 }
 

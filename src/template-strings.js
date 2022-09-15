@@ -7,20 +7,3 @@ const countryList =
 
 export const TEMPLATE = Handlebars.compile(countryCard);
 export const COUNTRY_LIST = Handlebars.compile(countryList);
-
-export function rendeCardCountry(savedCountry) {
-  htmlUlFlagAndCounty.innerHTML = '';
-  const markup = TEMPLATE(savedCountry[0]);
-
-  htmlDivCountryDescription.innerHTML = markup;
-}
-
-export function renderCardFlagAndCountry(savedCountry) {
-  let mark = [];
-  for (let index = savedCountry.length - 1; index >= 0; index = index - 1) {
-    const markup = COUNTRY_LIST(savedCountry[index]);
-    mark.push(markup);
-  }
-  htmlUlFlagAndCounty.innerHTML = mark.join('');
-  htmlDivCountryDescription.innerHTML = '';
-}
